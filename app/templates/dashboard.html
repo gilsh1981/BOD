@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -71,19 +71,15 @@
         .profile input[type="file"] {
             display: none;
         }
-        .calendar-container {
-            width: 50%;
-            margin: 0 auto;
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
         }
-        .fc-toolbar {
-            display: flex;
-            justify-content: space-between;
-        }
-        .fc-toolbar h2 {
-            font-size: 1.5em;
-        }
-        .fc-toolbar .fc-button-group {
-            margin-right: 10px;
+        .grid-item {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -102,12 +98,30 @@
             <p>bfirst</p>
         </div>
         <a href="{{ url_for('routes.home') }}">Home</a>
-        <a href="{{ url_for('routes.dashboard') }}">Workspace</a>
+        <a href="{{ url_for('routes.dashboard') }}">Dashboard</a>
         <a href="{{ url_for('routes.events') }}">My Events</a>
+        <a href="#">Calendar</a>
+        <a href="#">Actions</a>
+        <a href="#">Resources</a>
+        <a href="#">Directory</a>
+        <a href="#">Messenger</a>
+        <a href="#">Tasks</a>
+        <a href="#">Help</a>
     </div>
     <div class="content">
-        <div class="calendar-container">
-            <div id="calendar"></div>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h3>My Bookings</h3>
+                <!-- Booking details here -->
+            </div>
+            <div class="grid-item">
+                <h3>My Signatures</h3>
+                <!-- Signature details here -->
+            </div>
+            <div class="grid-item">
+                <h3>My Archive</h3>
+                <!-- Archive details here -->
+            </div>
         </div>
     </div>
     <footer>
@@ -123,35 +137,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"/>
-    <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'year,month,agendaWeek,agendaDay'
-                },
-                editable: true,
-                events: [], // Load your events here
-                dayClick: function(date, jsEvent, view) {
-                    var eventName = prompt('Enter Event Name:');
-                    if (eventName) {
-                        var newEvent = {
-                            title: eventName,
-                            start: date,
-                            allDay: true
-                        };
-                        $('#calendar').fullCalendar('renderEvent', newEvent);
-                        // You can send an AJAX request here to save the event in the backend
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>
